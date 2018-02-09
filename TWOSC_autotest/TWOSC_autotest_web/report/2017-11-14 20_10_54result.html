@@ -1,0 +1,2135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>智慧供应链自动化测试</title>
+    <meta name="generator" content="HTMLTestRunner 0.9.1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    
+<style type="text/css" media="screen">
+    body        { font-family: verdana, arial, helvetica, sans-serif; font-size: 80%; }
+    table       { font-size: 100%; }
+    pre         { white-space: pre-wrap;word-wrap: break-word; }
+
+    /* -- heading ---------------------------------------------------------------------- */
+    h1 {
+        font-size: 16pt;
+        color: gray;
+    }
+    .heading {
+        margin-top: 0ex;
+        margin-bottom: 1ex;
+    }
+
+    .heading .attribute {
+        margin-top: 1ex;
+        margin-bottom: 0;
+    }
+
+    .heading .description {
+        margin-top: 2ex;
+        margin-bottom: 3ex;
+    }
+
+    /* -- css div popup ------------------------------------------------------------------------ */
+    a.popup_link {
+    }
+
+    a.popup_link:hover {
+        color: red;
+    }
+
+    .popup_window {
+        display: none;
+        position: relative;
+        left: 0px;
+        top: 0px;
+        /*border: solid #627173 1px; */
+        padding: 10px;
+        /*background-color: #E6E6D6; */
+        font-family: "Lucida Console", "Courier New", Courier, monospace;
+        text-align: left;
+        font-size: 8pt;
+        /* width: 500px;*/
+    }
+
+    }
+    /* -- report ------------------------------------------------------------------------ */
+    #show_detail_line {
+        margin-top: 3ex;
+        margin-bottom: 1ex;
+    }
+    #result_table {
+        width: 99%;
+    }
+    #header_row {
+        font-weight: bold;
+        color: #303641;
+        background-color: #ebebeb;
+    }
+    #total_row  { font-weight: bold; }
+    .passClass  { background-color: #bdedbc; }
+    .failClass  { background-color: #ffefa4; }
+    .errorClass { background-color: #ffc9c9; }
+    .passCase   { color: #6c6; }
+    .failCase   { color: #FF6600; font-weight: bold; }
+    .errorCase  { color: #c00; font-weight: bold; }
+    .hiddenRow  { display: none; }
+    .testcase   { margin-left: 2em; }
+
+
+    /* -- ending ---------------------------------------------------------------------- */
+    #ending {
+    }
+
+    #div_base {
+                position:absolute;
+                top:0%;
+                left:5%;
+                right:5%;
+                width: auto;
+                height: auto;
+                margin: -15px 0 0 0;
+    }
+</style>
+
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="js/echarts.common.min.js"></script>
+</head>
+<body>
+    <script language="javascript" type="text/javascript"><!--
+    output_list = Array();
+
+    /* level - 0:Summary; 1:Failed; 2:All */
+    function showCase(level) {
+        trs = document.getElementsByTagName("tr");
+        for (var i = 0; i < trs.length; i++) {
+            tr = trs[i];
+            id = tr.id;
+            if (id.substr(0,2) == 'ft') {
+                if (level < 1) {
+                    tr.className = 'hiddenRow';
+                }
+                else {
+                    tr.className = '';
+                }
+            }
+            if (id.substr(0,2) == 'pt') {
+                if (level > 1) {
+                    tr.className = '';
+                }
+                else {
+                    tr.className = 'hiddenRow';
+                }
+            }
+        }
+    }
+
+
+    function showClassDetail(cid, count) {
+        var id_list = Array(count);
+        var toHide = 1;
+        for (var i = 0; i < count; i++) {
+            tid0 = 't' + cid.substr(1) + '.' + (i+1);
+            tid = 'f' + tid0;
+            tr = document.getElementById(tid);
+            if (!tr) {
+                tid = 'p' + tid0;
+                tr = document.getElementById(tid);
+            }
+            id_list[i] = tid;
+            if (tr.className) {
+                toHide = 0;
+            }
+        }
+        for (var i = 0; i < count; i++) {
+            tid = id_list[i];
+            if (toHide) {
+                document.getElementById('div_'+tid).style.display = 'none'
+                document.getElementById(tid).className = 'hiddenRow';
+            }
+            else {
+                document.getElementById(tid).className = '';
+            }
+        }
+    }
+
+
+    function showTestDetail(div_id){
+        var details_div = document.getElementById(div_id)
+        var displayState = details_div.style.display
+        // alert(displayState)
+        if (displayState != 'block' ) {
+            displayState = 'block'
+            details_div.style.display = 'block'
+        }
+        else {
+            details_div.style.display = 'none'
+        }
+    }
+
+
+    function html_escape(s) {
+        s = s.replace(/&/g,'&amp;');
+        s = s.replace(/</g,'&lt;');
+        s = s.replace(/>/g,'&gt;');
+        return s;
+    }
+
+    /* obsoleted by detail in <div>
+    function showOutput(id, name) {
+        var w = window.open("", //url
+                        name,
+                        "resizable,scrollbars,status,width=800,height=450");
+        d = w.document;
+        d.write("<pre>");
+        d.write(html_escape(output_list[id]));
+        d.write("\n");
+        d.write("<a href='javascript:window.close()'>close</a>\n");
+        d.write("</pre>\n");
+        d.close();
+    }
+    */
+    --></script>
+
+    <div id="div_base">
+        
+    <div class='page-header'>
+        <h1>智慧供应链自动化测试</h1>
+    <p class='attribute'><strong>开始时间:</strong> 2017-11-14 20:10:54</p>
+<p class='attribute'><strong>运行时长:</strong> 0:35:42.565200</p>
+<p class='attribute'><strong>状态:</strong> 通过 62 失败 4 错误 25</p>
+
+    </div>
+    <div style="float: left;width:50%;"><p class='description'>环境：win10 浏览器：chrome</p></div>
+    <div id="chart" style="width:50%;height:400px;float:left;"></div>
+
+        
+    <div class="btn-group btn-group-sm">
+        <button class="btn btn-default" onclick='javascript:showCase(0)'>总结</button>
+        <button class="btn btn-default" onclick='javascript:showCase(1)'>失败</button>
+        <button class="btn btn-default" onclick='javascript:showCase(2)'>全部</button>
+    </div>
+    <p></p>
+    <table id='result_table' class="table table-bordered">
+        <colgroup>
+            <col align='left' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+            <col align='right' />
+        </colgroup>
+        <tr id='header_row'>
+            <td>测试套件/测试用例</td>
+            <td>总数</td>
+            <td>通过</td>
+            <td>失败</td>
+            <td>错误</td>
+            <td>查看</td>
+        </tr>
+        
+    <tr class='passClass'>
+        <td>A_home_page_forgotPsw_main_sta.forgotPsw: 跑流程，首页忘记密码点击测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c1',1)">详情</a></td>
+    </tr>
+
+<tr id='pt1.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_ForgotPsw: 点击忘记密码</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_home_page_logo_main_sta.logoTest: 跑流程，首页logo点击测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c2',1)">详情</a></td>
+    </tr>
+
+<tr id='pt2.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_logo</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_login_biaoduanwuzibuzhang_main_sta.loginTest: 跑流程，标段物资部长登陆测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c3',1)">详情</a></td>
+    </tr>
+
+<tr id='pt3.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_login_biaoduanyewu_main_sta.loginTest: 跑流程，标段业务人员登陆测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c4',1)">详情</a></td>
+    </tr>
+
+<tr id='pt4.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_login_fuwujigou_main_sta.loginTest: 跑流程，服务机构登陆测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c5',1)">详情</a></td>
+    </tr>
+
+<tr id='pt5.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_login_gongqushiyan_main_sta.loginTest: 跑流程，工区实验人员登陆测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c6',1)">详情</a></td>
+    </tr>
+
+<tr id='pt6.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_login_gongquwuzibuzhang_main_sta.loginTest: 跑流程，工区物资部长登陆测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c7',1)">详情</a></td>
+    </tr>
+
+<tr id='pt7.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_login_gongquyanshou_main_sta.loginTest: 跑主流程，工区验收人员登陆测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c8',1)">详情</a></td>
+    </tr>
+
+<tr id='pt8.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login: 跑主流程,工区验收人员账号密码正确</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_login_gongquyewu_main_sta.loginTest:      跑主流程，工区业务人员登陆测试     </td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c9',1)">详情</a></td>
+    </tr>
+
+<tr id='pt9.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login1: 跑主流程，工区业务人员用户名和密码正确</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_login_gongyingshang_main_sta.loginTest: 跑流程，供应商登陆测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c10',1)">详情</a></td>
+    </tr>
+
+<tr id='pt10.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_login_jianlidanwei_main_sta.loginTest: 跑流程，监理单位登陆测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c11',1)">详情</a></td>
+    </tr>
+
+<tr id='pt11.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_login_wuzishebeibu_main_sta.loginTest: 跑流程，物资设备部登陆测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c12',1)">详情</a></td>
+    </tr>
+
+<tr id='pt12.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_login_zhihuibucaiwu_main_sta.loginTest: 跑流程，指挥部财务人员登陆测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c13',1)">详情</a></td>
+    </tr>
+
+<tr id='pt13.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>A_login_zhihuibuyewu_main_sta.loginTest: 跑流程，指挥部业务人员登陆测试！</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c14',1)">详情</a></td>
+    </tr>
+
+<tr id='pt14.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_login</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>gongquYewu_daibanshixiang_sta.gongquYwuTest: 工区业务人员-我的办公室-待办事项测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c15',1)">详情</a></td>
+    </tr>
+
+<tr id='pt15.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_daibanshixiang: 鼠标移动到待办事项</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>gongquYewu_huadonganniu_sta.gongquYewuTest: 工区业务人员页面滑动按钮测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c16',1)">详情</a></td>
+    </tr>
+
+<tr id='pt16.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_huadonganniu: 点击滑动按钮</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>gongquYewu_myoffice_login_sta.gongquYewuTest: 工区业务人员页面Logo点击测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c17',1)">详情</a></td>
+    </tr>
+
+<tr id='pt17.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_logo: 点击Logo测试</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>gongquYewu_search_sta.gongquYewuTest: 工区业务人员搜索测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c18',1)">详情</a></td>
+    </tr>
+
+<tr id='pt18.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_search: 点击搜索按钮</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>gongquYewu_xioaxi_sta.gongquYewuTest: 工区业务人员-我的办公室-消息，测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c19',1)">详情</a></td>
+    </tr>
+
+<tr id='pt19.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_xiaoxi: 点击消息按钮</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>gongquYewu_xuanzegongqu_sta.gongquYewuTest: 工区业务人员-我的办公室-选择工区测试</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c20',1)">详情</a></td>
+    </tr>
+
+<tr id='pt20.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_xuanzeGongqu: 切换工区测试</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>nianduxuqiujihua_jiagong_000_delet_sta.delet_xuqiujihua: 删除甲供2017年度需求计划</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c21',1)">详情</a></td>
+    </tr>
+
+<tr id='pt21.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_a_shanchuxuqiujihua</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt21.1')" >
+        通过</a>
+
+    <div id='div_pt21.1' class="popup_window">
+        <pre>
+        pt21.1: 90619890355000
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>nianduxuqiujihua_jiagong_001_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-创建2017年度需求计划</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c22',1)">详情</a></td>
+    </tr>
+
+<tr id='pt22.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiujihua: 创建2017年度需求计划-进入计划页面</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>nianduxuqiujihua_jiagong_002_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-创建2017年度需求计划-填写计划页面资料</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c23',1)">详情</a></td>
+    </tr>
+
+<tr id='pt23.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiujihua: 点击添加物资方式添加</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>nianduxuqiujihua_jiagong_003_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-创建2017年度需求计划-搜索添加物资</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c24',1)">详情</a></td>
+    </tr>
+
+<tr id='pt24.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiu: 测试搜索条件添加物资</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>nianduxuqiujihua_jiagong_004_gongquYewu_sta.gongquYewu_test: 工区业务人员-我的办公室-甲供-创建2017年度需求计划-计划详情页</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c25',1)">详情</a></td>
+    </tr>
+
+<tr id='pt25.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiujihua: 计划详情页的备选单搜索功能和下载导入功能</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_jiagong_005_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-2017年度需求计划-选择物资-删除备选单物资</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c26',1)">详情</a></td>
+    </tr>
+
+<tr id='ft26.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_chuangjianxuqiu: 测试选择物资页面删除物资</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft26.1')" >
+        错误</a>
+
+    <div id='div_ft26.1' class="popup_window">
+        <pre>
+        ft26.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_005_gongquYewu_sta.py", line 37, in test_chuangjianxuqiu
+    assert_text = self.driver.find_element(By.CSS_SELECTOR, '#planDetailsTable &gt; tbody &gt; tr &gt; td:nth-child(2)').text
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#planDetailsTable &gt; tbody &gt; tr &gt; td:nth-child(2)"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_jiagong_006_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-创建2017年度需求计划-修改物资参数</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c27',1)">详情</a></td>
+    </tr>
+
+<tr id='ft27.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquYewu</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft27.1')" >
+        错误</a>
+
+    <div id='div_ft27.1' class="popup_window">
+        <pre>
+        ft27.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_006_gongquYewu_sta.py", line 17, in test_gongquYewu
+    self.driver.find_element(By.CSS_SELECTOR, 'a[href="/planManagement/planManage_m"]').click()  # 点击总/年度需求计划
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"a[href="/planManagement/planManage_m"]"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_jiagong_007_gongqushiyan_sta.gongquShiyanTest: 测试2017年度需求计划-甲供-工区实验人员审批</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c28',1)">详情</a></td>
+    </tr>
+
+<tr id='ft28.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquShiyan: 测2017年度需求计划-甲供-工区实验人员-指派</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft28.1')" >
+        错误</a>
+
+    <div id='div_ft28.1' class="popup_window">
+        <pre>
+        ft28.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_007_gongqushiyan_sta.py", line 20, in test_gongquShiyan
+    self.driver.find_element(By.CSS_SELECTOR, '#workItemList &gt; li &gt; div:nth-child(2) &gt; a').click()  # 点击需要审批的计划
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#workItemList &gt; li &gt; div:nth-child(2) &gt; a"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>nianduxuqiujihua_jiagong_008_fuwuJigou_sta.fuwuJigouTest: 测试2017年度需求计划-甲供-服务机构-审批</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c29',1)">详情</a></td>
+    </tr>
+
+<tr id='pt29.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_fuwuJigou: 测试被指派-审批驳回</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_jiagong_009_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-创建总需求计划-修改物资参数</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c30',1)">详情</a></td>
+    </tr>
+
+<tr id='ft30.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquYewu</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft30.1')" >
+        错误</a>
+
+    <div id='div_ft30.1' class="popup_window">
+        <pre>
+        ft30.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_009_gongquYewu_sta.py", line 28, in test_gongquYewu
+    self.driver.find_element(By.CSS_SELECTOR, '#tecnlReqrDescrib').clear()
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#tecnlReqrDescrib"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_jiagong_010_gongquBuzhang_sta.gongquBuzhangTest: 工区物资部长-我的办公室-审批甲供2017年度需求计划</td>
+        <td>7</td>
+        <td>0</td>
+        <td>2</td>
+        <td>5</td>
+        <td><a href="javascript:showClassDetail('c31',7)">详情</a></td>
+    </tr>
+
+<tr id='ft31.1' class='none'>
+    <td class='failCase'><div class='testcase'>test_gongquBuzhang_01: 物资部长我的办公室-测试进入总需求详情页</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft31.1')" >
+        失败</a>
+
+    <div id='div_ft31.1' class="popup_window">
+        <pre>
+        ft31.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_010_gongquBuzhang_sta.py", line 26, in test_gongquBuzhang_01
+    self.assertEqual(text, 'MHTJ-23标一工区   2017年度需求计划状态')
+AssertionError: '会签状态' != 'MHTJ-23标一工区   2017年度需求计划状态'
+- 会签状态
++ MHTJ-23标一工区   2017年度需求计划状态
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft31.2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_02: 测试总需求详情页搜索选项-名称搜索</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft31.2')" >
+        错误</a>
+
+    <div id='div_ft31.2' class="popup_window">
+        <pre>
+        ft31.2: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_010_gongquBuzhang_sta.py", line 40, in test_gongquBuzhang_02
+    self.driver.find_element(By.CSS_SELECTOR, '#searchMaterialParams').send_keys('60kg')  # 输入规格型号搜索
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#searchMaterialParams"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft31.3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_03: 测试总需求详情页搜索选项-规格搜索</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft31.3')" >
+        错误</a>
+
+    <div id='div_ft31.3' class="popup_window">
+        <pre>
+        ft31.3: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_010_gongquBuzhang_sta.py", line 58, in test_gongquBuzhang_03
+    self.driver.find_element(By.CSS_SELECTOR, '#searchMaterialParams').send_keys('100m')  # 输入规格型号搜索
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#searchMaterialParams"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft31.4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_04: 测试总需求详情页-添加审批人员</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft31.4')" >
+        错误</a>
+
+    <div id='div_ft31.4' class="popup_window">
+        <pre>
+        ft31.4: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_010_gongquBuzhang_sta.py", line 77, in test_gongquBuzhang_04
+    self.driver.find_element(By.CSS_SELECTOR, '#addActor &gt; tr:nth-child(3) &gt; td.col-xs-10 &gt; a').click()  # 点击添加审批人员
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#addActor &gt; tr:nth-child(3) &gt; td.col-xs-10 &gt; a"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft31.5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_05: 测试需求计划详情页-导出</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft31.5')" >
+        错误</a>
+
+    <div id='div_ft31.5' class="popup_window">
+        <pre>
+        ft31.5: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_010_gongquBuzhang_sta.py", line 104, in test_gongquBuzhang_05
+    self.driver.find_element(By.CSS_SELECTOR, '#reject &gt; div.pull-right.btn-group &gt; a').click()  # 点击导出
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#reject &gt; div.pull-right.btn-group &gt; a"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft31.6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_06: 测试需求计划详情页-选择页数</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft31.6')" >
+        错误</a>
+
+    <div id='div_ft31.6' class="popup_window">
+        <pre>
+        ft31.6: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_010_gongquBuzhang_sta.py", line 121, in test_gongquBuzhang_06
+    self.driver.find_element(By.CSS_SELECTOR, 'body &gt; div.wrapper &gt; div:nth-child(5) &gt; div &gt; div &gt; div:nth-child(9) &gt; div.fixed-table-container &gt; div.fixed-table-pagination &gt; '
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.wrapper &gt; div:nth-child(5) &gt; div &gt; div &gt; div:nth-child(9) &gt; div.fixed-table-container &gt; div.fixed-table-pagination &gt; div.pull-left.pagination-detail &gt; span.page-list &gt; span &gt; button &gt; span.page-size"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft31.7' class='none'>
+    <td class='failCase'><div class='testcase'>test_gongquBuzhang_07: 测试需求详情页-填写备注，通过审批</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft31.7')" >
+        失败</a>
+
+    <div id='div_ft31.7' class="popup_window">
+        <pre>
+        ft31.7: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_010_gongquBuzhang_sta.py", line 155, in test_gongquBuzhang_07
+    self.assertEqual(text, '标段物资部长    (当前)')
+AssertionError: '杨延勇' != '标段物资部长    (当前)'
+- 杨延勇
++ 标段物资部长    (当前)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_jiagong_011_biaoduanBuzhang_sta.biaoduanBuzhangTest: 测试标段物资部长-审批甲供总需求计划</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c32',1)">详情</a></td>
+    </tr>
+
+<tr id='ft32.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_biaoduanBuzhang: 测试批准总需求计划</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft32.1')" >
+        错误</a>
+
+    <div id='div_ft32.1' class="popup_window">
+        <pre>
+        ft32.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_011_biaoduanBuzhang_sta.py", line 28, in test_biaoduanBuzhang
+    self.driver.find_element(By.CSS_SELECTOR, 'input[value="通过"]').click()  # 点击通过
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"input[value="通过"]"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_jiagong_012_gongquyanshou_sta.gongquShiyanTest: 测试总需求计划-甲供-工区验收人员-审批</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c33',1)">详情</a></td>
+    </tr>
+
+<tr id='ft33.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquShiyan: 审批通过</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft33.1')" >
+        错误</a>
+
+    <div id='div_ft33.1' class="popup_window">
+        <pre>
+        ft33.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_jiagong_012_gongquyanshou_sta.py", line 23, in test_gongquShiyan
+    self.driver.find_element(By.CSS_SELECTOR, 'input[value="通过"]').click()  # 勾选通过
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"input[value="通过"]"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>nianduxuqiujihua_liancai_000_delet_sta.delet_xuqiujihua: 删除联采2017年度需求计划</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c34',1)">详情</a></td>
+    </tr>
+
+<tr id='pt34.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_a_shanchuxuqiujihua</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt34.1')" >
+        通过</a>
+
+    <div id='div_pt34.1' class="popup_window">
+        <pre>
+        pt34.1: 90619898546000
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_liancai_007_gongqushiyan_sta.gongquShiyanTest: 测试工区试验人员-联采-2017年度需求计划-指派</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c35',1)">详情</a></td>
+    </tr>
+
+<tr id='ft35.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquShiyan: 测试指派给服务机构</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft35.1')" >
+        错误</a>
+
+    <div id='div_ft35.1' class="popup_window">
+        <pre>
+        ft35.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_liancai_007_gongqushiyan_sta.py", line 21, in test_gongquShiyan
+    self.driver.find_element(By.CSS_SELECTOR, '#workItemList &gt; li &gt; div:nth-child(2) &gt; a').click()  # 点击需要审批的计划
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#workItemList &gt; li &gt; div:nth-child(2) &gt; a"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_liancai_008_fuwuJigou_sta.fuwuJigouTest: 测试2017年度需求计划-联采-服务机构-审批</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c36',1)">详情</a></td>
+    </tr>
+
+<tr id='ft36.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_fuwuJigou: 测试被指派-审批驳回</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft36.1')" >
+        错误</a>
+
+    <div id='div_ft36.1' class="popup_window">
+        <pre>
+        ft36.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_liancai_008_fuwuJigou_sta.py", line 22, in test_fuwuJigou
+    self.driver.find_element(By.CSS_SELECTOR, 'input[value="驳回"]').click()  # 勾选驳回
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"input[value="驳回"]"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_liancai_009_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-联采-创建总需求计划-修改物资参数</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c37',1)">详情</a></td>
+    </tr>
+
+<tr id='ft37.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquYewu</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft37.1')" >
+        错误</a>
+
+    <div id='div_ft37.1' class="popup_window">
+        <pre>
+        ft37.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_liancai_009_gongquYewu_sta.py", line 21, in test_gongquYewu
+    self.driver.find_element(By.LINK_TEXT, '2017年度需求计划').click()  # 点击2017年度需求计划，进入计划详情页
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"link text","selector":"2017年度需求计划"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_liancai_010_gongquBuzhang_sta.gongquBuzhangTest: 工区物资部长-我的办公室-审批联采2017年度需求计划</td>
+        <td>7</td>
+        <td>0</td>
+        <td>1</td>
+        <td>6</td>
+        <td><a href="javascript:showClassDetail('c38',7)">详情</a></td>
+    </tr>
+
+<tr id='ft38.1' class='none'>
+    <td class='failCase'><div class='testcase'>test_gongquBuzhang_01: 物资部长我的办公室-测试进入总需求详情页</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft38.1')" >
+        失败</a>
+
+    <div id='div_ft38.1' class="popup_window">
+        <pre>
+        ft38.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_liancai_010_gongquBuzhang_sta.py", line 26, in test_gongquBuzhang_01
+    self.assertEqual(text, 'MHTJ-23标一工区   2017年度需求计划状态')
+AssertionError: '会签状态' != 'MHTJ-23标一工区   2017年度需求计划状态'
+- 会签状态
++ MHTJ-23标一工区   2017年度需求计划状态
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft38.2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_02: 测试总需求详情页搜索选项-名称搜索</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft38.2')" >
+        错误</a>
+
+    <div id='div_ft38.2' class="popup_window">
+        <pre>
+        ft38.2: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_liancai_010_gongquBuzhang_sta.py", line 40, in test_gongquBuzhang_02
+    self.driver.find_element(By.CSS_SELECTOR, '#searchMaterialParams').send_keys('60kg')  # 输入规格型号搜索
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#searchMaterialParams"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft38.3' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_03: 测试总需求详情页搜索选项-规格搜索</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft38.3')" >
+        错误</a>
+
+    <div id='div_ft38.3' class="popup_window">
+        <pre>
+        ft38.3: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_liancai_010_gongquBuzhang_sta.py", line 58, in test_gongquBuzhang_03
+    self.driver.find_element(By.CSS_SELECTOR, '#searchMaterialParams').send_keys('100m')  # 输入规格型号搜索
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#searchMaterialParams"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft38.4' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_04: 测试总需求详情页-添加审批人员</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft38.4')" >
+        错误</a>
+
+    <div id='div_ft38.4' class="popup_window">
+        <pre>
+        ft38.4: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_liancai_010_gongquBuzhang_sta.py", line 77, in test_gongquBuzhang_04
+    self.driver.find_element(By.CSS_SELECTOR, '#addActor &gt; tr:nth-child(3) &gt; td.col-xs-10 &gt; a').click()  # 点击添加审批人员
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#addActor &gt; tr:nth-child(3) &gt; td.col-xs-10 &gt; a"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft38.5' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_05: 测试需求计划详情页-导出</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft38.5')" >
+        错误</a>
+
+    <div id='div_ft38.5' class="popup_window">
+        <pre>
+        ft38.5: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_liancai_010_gongquBuzhang_sta.py", line 104, in test_gongquBuzhang_05
+    self.driver.find_element(By.CSS_SELECTOR, '#reject &gt; div.pull-right.btn-group &gt; a').click()  # 点击导出
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#reject &gt; div.pull-right.btn-group &gt; a"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft38.6' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_06: 测试需求计划详情页-选择页数</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft38.6')" >
+        错误</a>
+
+    <div id='div_ft38.6' class="popup_window">
+        <pre>
+        ft38.6: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_liancai_010_gongquBuzhang_sta.py", line 121, in test_gongquBuzhang_06
+    self.driver.find_element(By.CSS_SELECTOR, 'body &gt; div.wrapper &gt; div:nth-child(5) &gt; div &gt; div &gt; div:nth-child(9) &gt; div.fixed-table-container &gt; div.fixed-table-pagination &gt; '
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.wrapper &gt; div:nth-child(5) &gt; div &gt; div &gt; div:nth-child(9) &gt; div.fixed-table-container &gt; div.fixed-table-pagination &gt; div.pull-left.pagination-detail &gt; span.page-list &gt; span &gt; button &gt; span.page-size"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft38.7' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_07: 测试需求详情页-填写备注，通过审批</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft38.7')" >
+        错误</a>
+
+    <div id='div_ft38.7' class="popup_window">
+        <pre>
+        ft38.7: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_liancai_010_gongquBuzhang_sta.py", line 154, in test_gongquBuzhang_07
+    text = self.driver.find_element(By.CSS_SELECTOR, '#nodeState &gt; div &gt; div.col_5.active &gt; p:nth-child(4)').text
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#nodeState &gt; div &gt; div.col_5.active &gt; p:nth-child(4)"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_liancai_011_biaoduanBuzhang_sta.biaoduanBuzhangTest: 测试标段物资部长-审批联采总需求计划</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c39',1)">详情</a></td>
+    </tr>
+
+<tr id='ft39.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_biaoduanBuzhang: 测试批准总需求计划</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft39.1')" >
+        错误</a>
+
+    <div id='div_ft39.1' class="popup_window">
+        <pre>
+        ft39.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_liancai_011_biaoduanBuzhang_sta.py", line 28, in test_biaoduanBuzhang
+    self.driver.find_element(By.CSS_SELECTOR, 'input[value="通过"]').click()  # 点击通过
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"input[value="通过"]"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>nianduxuqiujihua_liancai_012_gongquyanshou_sta.gongquShiyanTest: 测试总需求计划-甲供-工区验收人员-审批</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c40',1)">详情</a></td>
+    </tr>
+
+<tr id='ft40.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquShiyan: 审批通过</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft40.1')" >
+        错误</a>
+
+    <div id='div_ft40.1' class="popup_window">
+        <pre>
+        ft40.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\nianduxuqiujihua_liancai_012_gongquyanshou_sta.py", line 23, in test_gongquShiyan
+    self.driver.find_element(By.CSS_SELECTOR, 'input[value="通过"]').click()  # 勾选通过
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"input[value="通过"]"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_000_delet_sta.delet_xuqiujihua: 删除甲供总需求计划</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c41',1)">详情</a></td>
+    </tr>
+
+<tr id='pt41.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_a_shanchuxuqiujihua</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt41.1')" >
+        通过</a>
+
+    <div id='div_pt41.1' class="popup_window">
+        <pre>
+        pt41.1: 90617779629000
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_001_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-创建总/年度需求计划</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c42',1)">详情</a></td>
+    </tr>
+
+<tr id='pt42.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiujihua: 点击创建新计划</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_002_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-创建需求计划</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c43',1)">详情</a></td>
+    </tr>
+
+<tr id='pt43.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiujihua: 创建需求计划2-进入计划页面</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_003_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-创建总需求计划-填写计划页面资料</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c44',1)">详情</a></td>
+    </tr>
+
+<tr id='pt44.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiujihua: 测试添加物资-添加到备选单</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_004_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-创建总需求计划-搜索添加物资</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c45',1)">详情</a></td>
+    </tr>
+
+<tr id='pt45.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiu: 测试搜索条件添加物资</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_005_gongquYewu_sta.gongquYewu_test: 工区业务人员-我的办公室-甲供-创建需求计划-计划详情页</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c46',1)">详情</a></td>
+    </tr>
+
+<tr id='pt46.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiujihua: 计划详情页的备选单搜索功能和下载导入功能</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_006_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-创建总/年度需求计划-选择物资-删除备选单物资</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c47',1)">详情</a></td>
+    </tr>
+
+<tr id='pt47.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiu: 测试选择物资页面删除物资</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_007_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-创建总需求计划-修改物资参数</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c48',1)">详情</a></td>
+    </tr>
+
+<tr id='pt48.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquYewu</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_008_gongqushiyan_sta.gongquShiyanTest: 测试总需求计划-甲供-工区实验人员审批</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c49',1)">详情</a></td>
+    </tr>
+
+<tr id='pt49.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquShiyan: 测总需求计划-甲供-工区实验人员-指派</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_009_fuwuJigou_sta.fuwuJigouTest: 测试总需求计划-甲供-服务机构-审批</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c50',1)">详情</a></td>
+    </tr>
+
+<tr id='pt50.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_fuwuJigou: 测试被指派-审批驳回</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_010_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-甲供-创建总需求计划-修改物资参数</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c51',1)">详情</a></td>
+    </tr>
+
+<tr id='pt51.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquYewu</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>zongxuqiujihua_jiagong_011_gongquBuzhang_sta.gongquBuzhangTest: 工区物资部长-我的办公室-审批甲供总需求计划</td>
+        <td>7</td>
+        <td>6</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c52',7)">详情</a></td>
+    </tr>
+
+<tr id='ft52.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_01: 物资部长我的办公室-测试进入总需求详情页</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft52.1')" >
+        错误</a>
+
+    <div id='div_ft52.1' class="popup_window">
+        <pre>
+        ft52.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\zongxuqiujihua_jiagong_011_gongquBuzhang_sta.py", line 25, in test_gongquBuzhang_01
+    text = self.driver.find_element(By.CSS_SELECTOR, 'body &gt; div.wrapper &gt; div:nth-child(5) &gt; div &gt; div &gt; div.box-body &gt; div.text-center &gt; h4').text
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"body &gt; div.wrapper &gt; div:nth-child(5) &gt; div &gt; div &gt; div.box-body &gt; div.text-center &gt; h4"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt52.2' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquBuzhang_02: 测试总需求详情页搜索选项-名称搜索</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt52.3' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquBuzhang_03: 测试总需求详情页搜索选项-规格搜索</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt52.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquBuzhang_04: 测试总需求详情页-添加审批人员</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt52.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquBuzhang_05: 测试需求计划详情页-导出</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt52.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquBuzhang_06: 测试需求计划详情页-选择页数</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt52.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquBuzhang_07: 测试需求详情页-填写备注，通过审批</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_012_biaoduanBuzhang_sta.biaoduanBuzhangTest: 测试标段物资部长-审批甲供总需求计划</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c53',1)">详情</a></td>
+    </tr>
+
+<tr id='pt53.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_biaoduanBuzhang: 测试批准总需求计划</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_jiagong_013_gongquyanshou_sta.gongquShiyanTest: 测试总需求计划-甲供-工区验收人员-审批</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c54',1)">详情</a></td>
+    </tr>
+
+<tr id='pt54.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquShiyan: 审批通过</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_liancai_000_delet_sta.delet_xuqiujihua: 删除联采总需求计划</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c55',1)">详情</a></td>
+    </tr>
+
+<tr id='pt55.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_a_shanchuxuqiujihua</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_pt55.1')" >
+        通过</a>
+
+    <div id='div_pt55.1' class="popup_window">
+        <pre>
+        pt55.1: 90619028784000
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_liancai_001_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-联采-创建总需求计划</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c56',1)">详情</a></td>
+    </tr>
+
+<tr id='pt56.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiujihua: 创建需求计划2-点击创建计划页面</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_liancai_002_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-联采-创建总年度需求计划-填写计划页面资料</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c57',1)">详情</a></td>
+    </tr>
+
+<tr id='pt57.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiujihua</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_liancai_003_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-联采-创建总需求计划-搜索添加物资</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c58',1)">详情</a></td>
+    </tr>
+
+<tr id='pt58.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiu: 测试搜索条件添加物资</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>zongxuqiujihua_liancai_004_gongquYewu_sta.gongquYewu_test: 工区业务人员-我的办公室-联采-创建总需求计划-计划详情页</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c59',1)">详情</a></td>
+    </tr>
+
+<tr id='ft59.1' class='none'>
+    <td class='errorCase'><div class='testcase'>test_chuangjianxuqiujihua: 计划详情页的备选单搜索功能和下载导入功能</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft59.1')" >
+        错误</a>
+
+    <div id='div_ft59.1' class="popup_window">
+        <pre>
+        ft59.1: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\zongxuqiujihua_liancai_004_gongquYewu_sta.py", line 29, in test_chuangjianxuqiujihua
+    self.driver.find_element(By.CSS_SELECTOR, '#searchMaterialParams').send_keys('光圆')
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#searchMaterialParams"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_liancai_005_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-总需求计划-联采-选择物资-删除备选单物资</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c60',1)">详情</a></td>
+    </tr>
+
+<tr id='pt60.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_chuangjianxuqiu: 测试选择物资页面删除物资</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_liancai_006_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-联采-创建总需求计划-修改物资参数</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c61',1)">详情</a></td>
+    </tr>
+
+<tr id='pt61.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquYewu</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_liancai_007_gongquShiyan_sta.gongquShiyanTest: 测试总需求计划-联采-工区实验人员审批</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c62',1)">详情</a></td>
+    </tr>
+
+<tr id='pt62.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquShiyan: 测总需求计划-联采-工区实验人员-指派</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_liancai_008_fuwuJigou_sta.fuwuJigouTest: 测试总需求计划-联采-服务机构-审批</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c63',1)">详情</a></td>
+    </tr>
+
+<tr id='pt63.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_fuwuJigou: 测试被指派-审批驳回</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_liancai_009_gongquYewu_sta.gongquYewuTest: 工区业务人员-我的办公室-联采-创建总需求计划-修改物资参数</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c64',1)">详情</a></td>
+    </tr>
+
+<tr id='pt64.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquYewu</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='errorClass'>
+        <td>zongxuqiujihua_liancai_010_gongquBuzhang_sta.gongquBuzhangTest: 工区物资部长-我的办公室-审批联采总需求计划</td>
+        <td>7</td>
+        <td>5</td>
+        <td>1</td>
+        <td>1</td>
+        <td><a href="javascript:showClassDetail('c65',7)">详情</a></td>
+    </tr>
+
+<tr id='pt65.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquBuzhang_01: 物资部长我的办公室-测试进入总需求详情页</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='ft65.2' class='none'>
+    <td class='errorCase'><div class='testcase'>test_gongquBuzhang_02: 测试总需求详情页搜索选项-名称搜索</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft65.2')" >
+        错误</a>
+
+    <div id='div_ft65.2' class="popup_window">
+        <pre>
+        ft65.2: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\zongxuqiujihua_liancai_010_gongquBuzhang_sta.py", line 43, in test_gongquBuzhang_02
+    text = self.driver.find_element(By.CSS_SELECTOR, '#planningDetailsTable &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(3) &gt; span').text
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 843, in find_element
+    'value': value})['value']
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 308, in execute
+    self.error_handler.check_response(response)
+  File "D:\python\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 194, in check_response
+    raise exception_class(message, screen, stacktrace)
+selenium.common.exceptions.NoSuchElementException: Message: no such element: Unable to locate element: {"method":"css selector","selector":"#planningDetailsTable &gt; tbody &gt; tr:nth-child(1) &gt; td:nth-child(3) &gt; span"}
+  (Session info: chrome=58.0.3029.96)
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Windows NT 10.0.15063 x86_64)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='ft65.3' class='none'>
+    <td class='failCase'><div class='testcase'>test_gongquBuzhang_03: 测试总需求详情页搜索选项-规格搜索</div></td>
+    <td colspan='5' align='center'>
+
+    <!--css div popup start-->
+    <a class="popup_link" onfocus='this.blur();' href="javascript:showTestDetail('div_ft65.3')" >
+        失败</a>
+
+    <div id='div_ft65.3' class="popup_window">
+        <pre>
+        ft65.3: Traceback (most recent call last):
+  File "E:\TWOSC_autotest\TWOSC_autotest_web\testCase\zongxuqiujihua_liancai_010_gongquBuzhang_sta.py", line 62, in test_gongquBuzhang_03
+    self.assertEqual(text, '100m U71Mn(160km/h)')
+AssertionError: '异形钢轨 50-43kg' != '100m U71Mn(160km/h)'
+- 异形钢轨 50-43kg
++ 100m U71Mn(160km/h)
+
+
+        </pre>
+    </div>
+    <!--css div popup end-->
+
+    </td>
+</tr>
+
+<tr id='pt65.4' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquBuzhang_04: 测试总需求详情页-添加审批人员</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt65.5' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquBuzhang_05: 测试需求计划详情页-导出</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt65.6' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquBuzhang_06: 测试需求计划详情页-选择页数</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+<tr id='pt65.7' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquBuzhang_07: 测试需求详情页-填写备注，通过审批</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_liancai_011_biaoduanBuzhang_sta.biaoduanBuzhangTest: 测试标段物资部长-审批联采总需求计划</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c66',1)">详情</a></td>
+    </tr>
+
+<tr id='pt66.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_biaoduanBuzhang: 测试批准联采总需求计划</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+    <tr class='passClass'>
+        <td>zongxuqiujihua_liancai_012_gongquYanshou_sta.gongquShiyanTest: 测试总需求计划-联采-工区验收人员-审批</td>
+        <td>1</td>
+        <td>1</td>
+        <td>0</td>
+        <td>0</td>
+        <td><a href="javascript:showClassDetail('c67',1)">详情</a></td>
+    </tr>
+
+<tr id='pt67.1' class='hiddenRow'>
+    <td class='none'><div class='testcase'>test_gongquShiyan: 审批通过</div></td>
+    <td colspan='5' align='center'>通过</td>
+</tr>
+
+        <tr id='total_row'>
+            <td>总计</td>
+            <td>91</td>
+            <td>62</td>
+            <td>4</td>
+            <td>25</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+
+        <div id='ending'>&nbsp;</div>
+        
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('chart'));
+
+        // 指定图表的配置项和数据
+        var option = {
+            title : {
+                text: '测试执行情况',
+                x:'center'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+            legend: {
+                orient: 'vertical',
+                left: 'left',
+                data: ['通过','失败','错误']
+            },
+            series : [
+                {
+                    name: '测试执行情况',
+                    type: 'pie',
+                    radius : '60%',
+                    center: ['50%', '60%'],
+                    data:[
+                        {value:62, name:'通过'},
+                        {value:4, name:'失败'},
+                        {value:25, name:'错误'}
+                    ],
+                    itemStyle: {
+                        emphasis: {
+                            shadowBlur: 10,
+                            shadowOffsetX: 0,
+                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                        }
+                    }
+                }
+            ]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option);
+    </script>
+    
+    </div>
+</body>
+</html>

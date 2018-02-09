@@ -1,0 +1,36 @@
+﻿<add>
+<doc overwrite="true" commitWithin="1000" boos="1">
+<long name="ownerA">51316274314000</long>
+<str name="planName">总需求计划</str>
+<int name="versionNbr">1</int>
+<int name="bizObjAuditStsCde">1</int>
+<str name="sectionName">MHTJ-23标一工区</str>
+<str name="commandName">MHTJ-23</str>
+<long name="modifyTime">1518158315834</long>
+<int name="objectMakeTypeCode">1</int>
+<str name="planNbr">MHWZQX-0001</str>
+<long name="id_l">98116715833000</long>
+<str name="id">98116715833000</str>
+<int name="materEqpmTypeCde">1</int>
+<long name="buildUnitId">41167638932000</long>
+<long name="entrPsnId">51316274314000</long>
+<int name="versionStsCde">0</int>
+<long name="sectionId">50877179956000</long>
+<long name="commandId">47674712351000</long>
+<str name="entrPsnOrgName">蒙西华中铁路股份</str>
+<long name="entrPsnOrgId">41167638932000</long>
+<long name="createTime">1518158315834</long>
+<int name="BOState">1</int>
+<int name="planTypeCde">1</int>
+<arr name="containers">
+<str>OWNER_CONTEXT_50877179956000</str>
+<str>OWNER_A_41167638932000</str>
+<str>OWNER_CONTEXT_47674712351000</str>
+<str>OWNER_CONTEXT_45146930768000</str>
+<str>OWNER_CONTEXT_45146722415000</str>
+</arr>
+<str name="entrPsnName">工区业务人员</str>
+<str name="buildUnitName">蒙西华中铁路股份</str>
+<long name="_version_">1591905591514628096</long>
+<int name="changeCount">0</int>
+</add>

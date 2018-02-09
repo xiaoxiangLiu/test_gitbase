@@ -1,0 +1,5 @@
+2018-01-03 18:43:00,307 - test_logging.py[line:20] - DEBUG: this is debug
+2018-01-03 18:43:00,318 - test_logging.py[line:21] - INFO: this is info
+2018-01-03 18:43:00,318 - test_logging.py[line:22] - WARNING: this is warning
+2018-01-03 18:43:00,318 - test_logging.py[line:23] - ERROR: this is error
+2018-01-03 18:43:00,318 - test_logging.py[line:24] - CRITICAL: this is critical
